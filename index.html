@@ -1,0 +1,1837 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selamat Ultah, Mama Ririk! 🎂</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --bg: #fff8f0;
+        --bg2: #fff0e0;
+        --sf: #ffffff;
+        --terra: #c4622a;
+        --terra-l: #e08050;
+        --terra-d: #8a3818;
+        --kuning: #e8a820;
+        --kuning-l: #f5c840;
+        --hijau: #4a8a3a;
+        --hijau-l: #6aaa58;
+        --merah: #c83030;
+        --coklat: #6a3820;
+        --coklat-l: #9a5830;
+        --tx: #5a3820;
+        --txl: #4a2810;
+        --txm: #9a7060;
+        --border: #e8c8a8;
+        --shadow: rgba(100, 50, 20, 0.12);
+      }
+      body {
+        font-family: "Nunito", sans-serif;
+        background: var(--bg);
+        color: var(--txl);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* ── BATIK PATTERN BG ── */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+          radial-gradient(
+            circle at 15% 15%,
+            rgba(196, 98, 42, 0.06) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 85% 85%,
+            rgba(74, 138, 58, 0.06) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 50% 50%,
+            rgba(232, 168, 32, 0.04) 0%,
+            transparent 60%
+          );
+      }
+
+      /* ── STEAM PARTICLES ── */
+      #pts {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .pt {
+        position: absolute;
+        opacity: 0;
+        animation: steam var(--d, 6s) ease-in-out var(--dl, 0s) infinite;
+        font-size: var(--fs, 1.2rem);
+      }
+      @keyframes steam {
+        0% {
+          transform: translateY(0) translateX(0) scale(0.5);
+          opacity: 0;
+        }
+        20% {
+          opacity: 0.8;
+        }
+        80% {
+          opacity: 0.2;
+        }
+        100% {
+          transform: translateY(-100vh) translateX(var(--x, 30px)) scale(1.2);
+          opacity: 0;
+        }
+      }
+
+      /* ── SCREENS ── */
+      .screen {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        z-index: 10;
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s ease;
+      }
+      .screen.hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(16px);
+      }
+      .screen.exit {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
+      #s-msg1,
+      #s-msg2,
+      #s-game,
+      #s-voucher {
+        display: block;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        padding: 0;
+      }
+      .sw {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+        padding: 4rem 1.2rem 5rem;
+      }
+
+      /* ── ANIMATIONS ── */
+      .sq > * {
+        opacity: 0;
+        transform: translateY(12px);
+        animation: fu 0.6s ease both;
+      }
+      .sq > *:nth-child(1) {
+        animation-delay: 0.15s;
+      }
+      .sq > *:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+      .sq > *:nth-child(3) {
+        animation-delay: 0.45s;
+      }
+      .sq > *:nth-child(4) {
+        animation-delay: 0.6s;
+      }
+      .sq > *:nth-child(5) {
+        animation-delay: 0.75s;
+      }
+      .sq > *:nth-child(6) {
+        animation-delay: 0.9s;
+      }
+      .sq > *:nth-child(7) {
+        animation-delay: 1.05s;
+      }
+      .sq > *:nth-child(8) {
+        animation-delay: 1.2s;
+      }
+      @keyframes fu {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .cr {
+        opacity: 0;
+        transform: translateY(16px);
+        animation: fu 0.55s ease both;
+      }
+      .cr.d1 {
+        animation-delay: 0.1s;
+      }
+      .cr.d2 {
+        animation-delay: 0.22s;
+      }
+      .cr.d3 {
+        animation-delay: 0.36s;
+      }
+      .cr.d4 {
+        animation-delay: 0.5s;
+      }
+      .cr.d5 {
+        animation-delay: 0.65s;
+      }
+
+      /* ── INTRO ── */
+      #s-intro {
+        text-align: center;
+        background: linear-gradient(180deg, #fff8f0 0%, #ffe8d0 100%);
+      }
+      .pot-emoji {
+        font-size: 4rem;
+        display: block;
+        margin-bottom: 0.8rem;
+        animation: pot-wobble 2.5s ease-in-out infinite;
+      }
+      @keyframes pot-wobble {
+        0%,
+        100% {
+          transform: rotate(-5deg) scale(1);
+        }
+        50% {
+          transform: rotate(5deg) scale(1.05);
+        }
+      }
+      .i-flag {
+        display: inline-block;
+        background: var(--terra);
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        padding: 0.3rem 1.2rem;
+        border-radius: 20px;
+        margin-bottom: 1.2rem;
+      }
+      .i-name {
+        font-family: "Lora", serif;
+        font-size: clamp(2.4rem, 7vw, 4.5rem);
+        font-weight: 600;
+        color: var(--coklat);
+        line-height: 1.05;
+      }
+      .i-name span {
+        color: var(--terra);
+      }
+      .i-age {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--kuning), var(--terra-l));
+        color: #fff;
+        font-weight: 900;
+        font-size: 1.4rem;
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0.8rem auto;
+        box-shadow: 0 4px 20px rgba(196, 98, 42, 0.3);
+        animation: pulse-age 2s ease-in-out infinite;
+      }
+      @keyframes pulse-age {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.06);
+        }
+      }
+      .i-sub {
+        font-size: 1rem;
+        color: var(--txm);
+        line-height: 1.7;
+        margin: 0.5rem 0 1.5rem;
+        max-width: 320px;
+      }
+      .i-sub em {
+        color: var(--terra);
+        font-style: normal;
+        font-weight: 700;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: var(--terra);
+        color: #fff;
+        border: none;
+        padding: 0.9rem 2.4rem;
+        border-radius: 50px;
+        font-family: "Nunito", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(196, 98, 42, 0.35);
+        transition: all 0.3s;
+      }
+      .btn:hover {
+        background: var(--terra-d);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(196, 98, 42, 0.4);
+      }
+      .btn:active {
+        transform: translateY(0);
+      }
+      .arr {
+        transition: transform 0.3s;
+      }
+      .btn:hover .arr {
+        transform: translateX(5px);
+      }
+      .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: transparent;
+        color: var(--terra);
+        border: 2px solid var(--terra);
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        font-family: "Nunito", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .btn-outline:hover {
+        background: var(--terra);
+        color: #fff;
+      }
+
+      /* ── HALL ── */
+      #s-hall {
+        background: linear-gradient(180deg, #fff8f0 0%, #fff0dc 100%);
+      }
+      .hall-top {
+        text-align: center;
+        margin-bottom: 0.5rem;
+      }
+      .hall-top h2 {
+        font-family: "Lora", serif;
+        font-size: clamp(1.5rem, 4vw, 2.2rem);
+        color: var(--coklat);
+        font-weight: 600;
+      }
+      .hall-top p {
+        font-size: 0.82rem;
+        color: var(--txm);
+        margin-top: 0.3rem;
+      }
+      .steps-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+        width: 100%;
+        max-width: 380px;
+      }
+
+      /* ── STEP CARD ── */
+      .step-card {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: #fff;
+        border: 2px solid var(--border);
+        border-radius: 16px;
+        padding: 1rem 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .step-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: var(--clr, var(--terra));
+        border-radius: 4px 0 0 4px;
+      }
+      .step-card:hover:not(.locked) {
+        transform: translateX(4px);
+        border-color: var(--clr, var(--terra));
+        box-shadow: 0 4px 16px var(--shadow);
+      }
+      .step-card.locked {
+        cursor: not-allowed;
+        opacity: 0.55;
+        filter: grayscale(0.3);
+      }
+      .step-card.done .step-num {
+        background: var(--hijau);
+        color: #fff;
+      }
+      .step-card.done {
+        border-color: #c8e8c0;
+      }
+      .step-num {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--clr, var(--terra));
+        color: #fff;
+        font-weight: 900;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all 0.3s;
+      }
+      .step-card.locked .step-num {
+        background: #ccc;
+        color: #888;
+      }
+      .step-info {
+        flex: 1;
+      }
+      .step-info h3 {
+        font-size: 1rem;
+        font-weight: 800;
+        color: var(--txl);
+      }
+      .step-info p {
+        font-size: 0.78rem;
+        color: var(--txm);
+        margin-top: 0.1rem;
+      }
+      .step-badge {
+        font-size: 1.8rem;
+        flex-shrink: 0;
+      }
+      .step-lock {
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        opacity: 0.6;
+      }
+      .step-card.done .step-info h3::after {
+        content: " ✓";
+        color: var(--hijau);
+      }
+
+      .progress-bar-wrap {
+        width: 100%;
+        max-width: 380px;
+        background: #f0e0d0;
+        border-radius: 8px;
+        height: 10px;
+        overflow: hidden;
+      }
+      .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--terra), var(--kuning));
+        border-radius: 8px;
+        transition: width 0.5s ease;
+        width: 0%;
+      }
+      .progress-label {
+        font-size: 0.75rem;
+        color: var(--txm);
+        text-align: center;
+        margin-top: 0.3rem;
+      }
+
+      /* ── CONTENT CARDS ── */
+      .content-card {
+        max-width: 520px;
+        width: 100%;
+        background: #fff;
+        border: 2px solid var(--border);
+        border-radius: 20px;
+        padding: 2rem 1.8rem;
+        box-shadow: 0 4px 24px var(--shadow);
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+      }
+      .content-card::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(
+          90deg,
+          var(--terra),
+          var(--kuning),
+          var(--hijau)
+        );
+      }
+      .card-wave {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 40px;
+        background: linear-gradient(
+          180deg,
+          transparent,
+          rgba(232, 168, 32, 0.06)
+        );
+      }
+      .c-icon {
+        font-size: 3rem;
+        margin-bottom: 0.8rem;
+        display: block;
+      }
+      .c-tag {
+        display: inline-block;
+        background: var(--terra);
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        padding: 0.25rem 0.9rem;
+        border-radius: 20px;
+        margin-bottom: 0.8rem;
+      }
+      .c-title {
+        font-family: "Lora", serif;
+        font-size: clamp(1.6rem, 4vw, 2.2rem);
+        font-weight: 600;
+        color: var(--coklat);
+        line-height: 1.15;
+        margin-bottom: 1rem;
+      }
+      .c-divider {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin: 0.8rem 0 1rem;
+      }
+      .c-divider::before,
+      .c-divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+      .c-divider span {
+        font-size: 1.2rem;
+      }
+      .c-body {
+        font-size: 1rem;
+        line-height: 1.85;
+        color: var(--tx);
+        text-align: left;
+      }
+      .c-body em {
+        color: var(--terra);
+        font-style: normal;
+        font-weight: 700;
+      }
+      .c-body .lucu {
+        color: var(--hijau);
+        font-style: italic;
+        font-weight: 700;
+      }
+      .c-sig {
+        margin-top: 1.5rem;
+        font-family: "Lora", serif;
+        font-style: italic;
+        font-size: 0.95rem;
+        color: var(--txm);
+        text-align: center;
+      }
+
+      /* ── DOAS GRID ── */
+      .doa-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.8rem;
+        max-width: 520px;
+        width: 100%;
+      }
+      .doa-item {
+        background: #fff;
+        border: 2px solid var(--border);
+        border-radius: 14px;
+        padding: 1rem;
+        text-align: center;
+        transition: transform 0.2s;
+      }
+      .doa-item:hover {
+        transform: translateY(-3px);
+      }
+      .doa-item .di {
+        font-size: 1.8rem;
+        margin-bottom: 0.4rem;
+        display: block;
+      }
+      .doa-item .dt {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.3rem;
+      }
+      .doa-item .db {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        color: var(--txm);
+      }
+      .doa-item.orange {
+        border-color: #f0c0a0;
+        background: #fffaf6;
+      }
+      .doa-item.orange .dt {
+        color: var(--terra);
+      }
+      .doa-item.green {
+        border-color: #c0e0b0;
+        background: #f6fff4;
+      }
+      .doa-item.green .dt {
+        color: var(--hijau);
+      }
+      .doa-item.yellow {
+        border-color: #f0e0a0;
+        background: #fffef0;
+      }
+      .doa-item.yellow .dt {
+        color: var(--kuning);
+      }
+      .doa-item.red {
+        border-color: #f0b0b0;
+        background: #fff6f6;
+      }
+      .doa-item.red .dt {
+        color: var(--merah);
+      }
+
+      /* ── FAMILY BANNER ── */
+      .family-banner {
+        max-width: 520px;
+        width: 100%;
+        background: linear-gradient(135deg, #fff5e8, #fff0dc);
+        border: 2px solid #f0d0a8;
+        border-radius: 16px;
+        padding: 1.2rem 1.5rem;
+        text-align: center;
+      }
+      .family-banner .fb-title {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--terra);
+        margin-bottom: 0.6rem;
+      }
+      .family-banner .fb-names {
+        font-family: "Lora", serif;
+        font-size: 1.1rem;
+        color: var(--coklat);
+        line-height: 1.9;
+      }
+      .family-banner .fb-names strong {
+        color: var(--terra);
+      }
+
+      /* ── BACK ── */
+      .back-inner {
+        align-self: flex-start;
+        background: transparent;
+        border: 2px solid var(--border);
+        color: var(--txm);
+        padding: 0.45rem 1.1rem;
+        border-radius: 50px;
+        font-family: "Nunito", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .back-inner:hover {
+        border-color: var(--terra);
+        color: var(--terra);
+        background: #fff5f0;
+      }
+
+      /* ── GAME ── */
+      .game-card {
+        max-width: 580px;
+        width: 100%;
+        background: #fff;
+        border: 2px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 24px var(--shadow);
+      }
+      .gh {
+        padding: 1.2rem 1.5rem;
+        border-bottom: 2px solid var(--border);
+        background: linear-gradient(135deg, #fff8f0, #fff0dc);
+      }
+      .gh h2 {
+        font-family: "Lora", serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--coklat);
+      }
+      .gh p {
+        font-size: 0.78rem;
+        color: var(--txm);
+        margin-top: 0.2rem;
+      }
+      .gstats {
+        display: flex;
+        gap: 1rem;
+        padding: 0.8rem 1.5rem;
+        border-bottom: 2px solid var(--border);
+        background: #fffcf8;
+        flex-wrap: wrap;
+      }
+      .gs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        min-width: 60px;
+      }
+      .gs span {
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--txm);
+      }
+      .gs strong {
+        font-family: "Lora", serif;
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: var(--terra);
+        line-height: 1;
+      }
+      .ttrack {
+        height: 6px;
+        background: #f0e0d0;
+        border-radius: 3px;
+      }
+      #tbar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--terra), var(--kuning));
+        border-radius: 3px;
+        transition: width 0.1s linear;
+      }
+      #arena {
+        width: 100%;
+        height: 340px;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(180deg, #e8f8e0 0%, #f8ffe8 100%);
+        cursor: pointer;
+      }
+      /* market shelf lines */
+      #arena::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 40px;
+        background: linear-gradient(
+          180deg,
+          transparent,
+          rgba(196, 98, 42, 0.1)
+        );
+      }
+      .item-fall {
+        position: absolute;
+        font-size: 2rem;
+        cursor: pointer;
+        animation: item-drop linear forwards;
+        user-select: none;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+      }
+      @keyframes item-drop {
+        0% {
+          transform: translateY(-50px);
+        }
+        100% {
+          transform: translateY(360px);
+        }
+      }
+      .item-fall:hover {
+        transform: scale(1.2) !important;
+      }
+      .catch-fx {
+        position: absolute;
+        pointer-events: none;
+        font-size: 1.6rem;
+        animation: pfx 0.5s ease-out forwards;
+      }
+      @keyframes pfx {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(2.5) translateY(-20px);
+        }
+      }
+      .pts-fx {
+        position: absolute;
+        pointer-events: none;
+        font-size: 0.9rem;
+        font-weight: 800;
+        color: var(--terra);
+        animation: sfx 0.8s ease-out forwards;
+        background: #fff;
+        border-radius: 20px;
+        padding: 0.1rem 0.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      @keyframes sfx {
+        0% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+      }
+      .miss-fx {
+        position: absolute;
+        pointer-events: none;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--merah);
+        animation: sfx 0.6s ease-out forwards;
+      }
+      #aov {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 248, 240, 0.94);
+        text-align: center;
+        padding: 2rem;
+        transition: opacity 0.4s;
+        border-radius: 0;
+      }
+      #aov h3 {
+        font-family: "Lora", serif;
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: var(--coklat);
+        margin: 0.5rem 0;
+      }
+      #aov p {
+        font-size: 0.88rem;
+        color: var(--txm);
+        line-height: 1.6;
+        max-width: 260px;
+      }
+      .score-big {
+        font-family: "Lora", serif;
+        font-size: 3.8rem;
+        font-weight: 600;
+        color: var(--terra);
+        line-height: 1;
+        margin: 0.3rem 0;
+      }
+      .btn-g {
+        margin-top: 0.9rem;
+        background: var(--terra);
+        color: #fff;
+        border: none;
+        padding: 0.7rem 2rem;
+        border-radius: 50px;
+        font-family: "Nunito", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 14px rgba(196, 98, 42, 0.3);
+      }
+      .btn-g:hover {
+        background: var(--terra-d);
+      }
+      #linfo {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--txm);
+        min-height: 1.8rem;
+        border-top: 2px solid var(--border);
+        text-align: center;
+        background: #fffcf8;
+      }
+
+      /* ── VOUCHER ── */
+      .v-outer {
+        max-width: 480px;
+        width: 100%;
+        border: 2px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 4px 24px var(--shadow);
+      }
+      .v-lbl {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--terra);
+        text-align: center;
+        margin-bottom: 0.8rem;
+      }
+      .vh-indomaret {
+        background: #e31837;
+        padding: 1.2rem 1.4rem;
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+      }
+      .vlogo-indo {
+        background: #fff;
+        border-radius: 6px;
+        padding: 0.4rem 0.8rem;
+        font-weight: 800;
+        font-size: 1rem;
+        color: #e31837;
+        letter-spacing: -0.3px;
+        white-space: nowrap;
+      }
+      .vht-indo {
+        color: #fff;
+      }
+      .vht-indo h3 {
+        font-family: "Lora", serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+      }
+      .vht-indo p {
+        font-size: 0.78rem;
+        opacity: 0.85;
+        margin-top: 0.1rem;
+      }
+      .vbody {
+        padding: 1.3rem 1.4rem 1rem;
+        background: #fff;
+      }
+      .vtag-indo {
+        display: inline-block;
+        background: #fff0f0;
+        color: #c83030;
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 0.22rem 0.8rem;
+        border-radius: 20px;
+        margin-bottom: 0.9rem;
+        border: 1px solid #f0c0c0;
+      }
+      .vamt {
+        text-align: center;
+        margin-bottom: 1.1rem;
+      }
+      .vamt .vl {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #888;
+        margin-bottom: 0.25rem;
+      }
+      .vamt .vv {
+        font-family: "Lora", serif;
+        font-size: 3rem;
+        font-weight: 600;
+        color: #e31837;
+        line-height: 1;
+      }
+      .vamt .vs {
+        font-size: 0.78rem;
+        color: #999;
+        margin-top: 0.3rem;
+      }
+      .vdash {
+        border: none;
+        background: repeating-linear-gradient(
+          90deg,
+          #e0e0e0 0,
+          #e0e0e0 10px,
+          transparent 10px,
+          transparent 18px
+        );
+        height: 1px;
+        margin: 0.9rem 0;
+      }
+      .bczone {
+        border-radius: 10px;
+        padding: 1rem;
+        text-align: center;
+        background: #f8f8f8;
+        border: 2px dashed #ddd;
+      }
+      .bczone img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        border-radius: 6px;
+        cursor: zoom-in;
+      }
+      .bczone img:hover {
+        opacity: 0.9;
+      }
+      .zoom-hint {
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #bbb;
+        margin-top: 0.4rem;
+      }
+      .bcnum {
+        font-family: monospace;
+        font-size: 0.82rem;
+        color: #444;
+        letter-spacing: 2px;
+        margin-top: 0.4rem;
+        font-weight: 600;
+      }
+      .vfoot {
+        padding: 0.9rem 1.4rem;
+        background: #fff5f5;
+        border-top: 1px solid #ffe0e0;
+      }
+      .vfoot p {
+        font-size: 0.75rem;
+        color: #888;
+        line-height: 1.7;
+      }
+      .vfoot strong {
+        color: #e31837;
+      }
+      /* lightbox */
+      #lb {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.92);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        cursor: zoom-out;
+      }
+      #lb.on {
+        display: flex;
+      }
+      #lb img {
+        max-width: 94vw;
+        max-height: 92vh;
+        border-radius: 10px;
+        animation: lbIn 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+      }
+      @keyframes lbIn {
+        from {
+          transform: scale(0.85);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      #lb-x {
+        position: fixed;
+        top: 1.2rem;
+        right: 1.4rem;
+        color: #fff;
+        font-size: 2rem;
+        cursor: pointer;
+        z-index: 10000;
+        background: none;
+        border: none;
+        line-height: 1;
+        font-family: sans-serif;
+      }
+
+      /* ── END ── */
+      #s-end {
+        background: linear-gradient(180deg, #fff8f0 0%, #ffe8d0 100%);
+        text-align: center;
+      }
+
+      /* ── CONFETTI ── */
+      .confetti-piece {
+        position: fixed;
+        width: 8px;
+        height: 8px;
+        border-radius: 2px;
+        pointer-events: none;
+        z-index: 998;
+        animation: conf-fall var(--cd, 3s) ease-in var(--cdl, 0s) forwards;
+      }
+      @keyframes conf-fall {
+        0% {
+          transform: translateY(-20px) rotate(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(110vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="pts"></div>
+
+    <!-- ══════════════════════════════
+     INTRO
+══════════════════════════════ -->
+    <div class="screen" id="s-intro">
+      <div class="sq">
+        <span class="pot-emoji">🍲</span>
+        <div class="i-flag">🎂 Selamat Ulang Tahun 🎂</div>
+        <h1 class="i-name">Mama <span>Ririk</span></h1>
+        <div class="i-age">52</div>
+        <p class="i-sub">
+          Mama dari <em>Melly Rossa Robeca</em> yang kami cintai 💕<br />
+          <span style="font-size: 0.88rem; color: var(--txm)"
+            >Ada 3 kado spesial yang menunggumu...</span
+          >
+        </p>
+        <button class="btn" onclick="goTo('hall')">
+          Buka Kadonya, Ma! <span class="arr">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+     HALL — STEP BY STEP
+══════════════════════════════ -->
+    <div class="screen hidden" id="s-hall">
+      <div class="sq hall-top">
+        <span style="font-size: 2rem">🎁</span>
+        <h2>Kado Mama Ririk</h2>
+        <p>Buka satu per satu ya, Ma 😊</p>
+      </div>
+
+      <div class="steps-row sq">
+        <div
+          class="step-card"
+          id="step1"
+          style="--clr: #c4622a"
+          onclick="goStep(1)"
+        >
+          <div class="step-num" id="num1">1</div>
+          <div class="step-info">
+            <h3>Ucapan Ulang Tahun</h3>
+            <p>Pesan spesial dari kami semua 💌</p>
+          </div>
+          <span class="step-badge">📖</span>
+        </div>
+
+        <div
+          class="step-card locked"
+          id="step2"
+          style="--clr: #4a8a3a"
+          onclick="goStep(2)"
+        >
+          <div class="step-num" id="num2">2</div>
+          <div class="step-info">
+            <h3>Main Dulu, Ma!</h3>
+            <p>Game seru buat Mama 🎮</p>
+          </div>
+          <span class="step-badge">🎮</span>
+          <span class="step-lock" id="lock2">🔒</span>
+        </div>
+
+        <div
+          class="step-card locked"
+          id="step3"
+          style="--clr: #e31837"
+          onclick="goStep(3)"
+        >
+          <div class="step-num" id="num3">3</div>
+          <div class="step-info">
+            <h3>Hadiah Kejutan!</h3>
+            <p>Voucher spesial buat Mama 🎁</p>
+          </div>
+          <span class="step-badge">🛍️</span>
+          <span class="step-lock" id="lock3">🔒</span>
+        </div>
+      </div>
+
+      <div class="progress-bar-wrap sq">
+        <div class="progress-bar" id="prog-bar"></div>
+      </div>
+      <p class="progress-label sq" id="prog-label">0 dari 3 kado dibuka</p>
+    </div>
+
+    <!-- ══════════════════════════════
+     MSG 1 — UCAPAN
+══════════════════════════════ -->
+    <div class="screen hidden" id="s-msg1">
+      <div class="sw">
+        <button class="back-inner" onclick="goTo('hall')">← Kembali</button>
+
+        <div class="content-card cr d1">
+          <div class="card-wave"></div>
+          <span class="c-icon">🎂</span>
+          <div class="c-tag">📖 Kado Pertama</div>
+          <h2 class="c-title">
+            Selamat Ulang<br />Tahun ke-52,<br />Mama Ririk! 🥰
+          </h2>
+          <div class="c-divider"><span>🌸</span></div>
+          <p class="c-body">
+            Ma, hari ini tepat <em>52 tahun</em> Mama ada di dunia ini. 52 tahun
+            penuh perjuangan, kasih sayang, dan semangat yang tidak pernah
+            padam.
+          </p>
+          <p class="c-body" style="margin-top: 0.9rem">
+            Mama sudah berjuang begitu banyak untuk keluarga, terutama untuk
+            <em>Melly</em>. Melihat betapa hebatnya Mama, kami semua kagum dan
+            bangga. 🌟
+          </p>
+          <p class="c-body" style="margin-top: 0.9rem">
+            <span class="lucu"
+              >Fun fact: Mama yang masak paling enak se-Indonesia. Kalau ada
+              yang protes, suruh ketemu saya dulu! 😂</span
+            >
+          </p>
+          <p class="c-body" style="margin-top: 0.9rem">
+            Meski perjalanan hidup tidak selalu mudah, Mama selalu kuat dan
+            tegar. Kami di sini, selalu sayang dan mendukung Mama. 💕
+          </p>
+          <p class="c-sig">— Dengan cinta tulus, dari keluarga 🙏</p>
+        </div>
+
+        <div class="doa-grid cr d2">
+          <div class="doa-item orange">
+            <span class="di">🌺</span>
+            <div class="dt">Kesehatan</div>
+            <div class="db">Semoga Mama selalu sehat dan kuat setiap hari</div>
+          </div>
+          <div class="doa-item green">
+            <span class="di">🌿</span>
+            <div class="dt">Kebahagiaan</div>
+            <div class="db">Senyum Mama adalah kebahagiaan kami semua</div>
+          </div>
+          <div class="doa-item yellow">
+            <span class="di">✨</span>
+            <div class="dt">Rezeki</div>
+            <div class="db">Semoga rezeki Mama mengalir lancar seperti air</div>
+          </div>
+          <div class="doa-item red">
+            <span class="di">🤲</span>
+            <div class="dt">Panjang Umur</div>
+            <div class="db">
+              Semoga Mama panjang umur dan dijauhkan dari sakit
+            </div>
+          </div>
+        </div>
+
+        <div class="family-banner cr d3">
+          <div class="fb-title">💐 Yang Selalu Menyayangi Mama</div>
+          <div class="fb-names">
+            <strong>Melly Rossa Robeca</strong> &amp; keluarga<br />
+            <span style="font-size: 0.9rem; color: var(--txm)"
+              >selalu ada untuk Mama 🥰</span
+            >
+          </div>
+        </div>
+
+        <div style="text-align: center" class="cr d4">
+          <button class="btn" onclick="completeStep(1)">
+            Lanjut ke Kado 2 <span class="arr">→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+     GAME — MAMA BELANJA
+══════════════════════════════ -->
+    <div class="screen hidden" id="s-game">
+      <div class="sw">
+        <button class="back-inner" onclick="goTo('hall')">← Kembali</button>
+
+        <div class="game-card cr d1">
+          <div class="gh">
+            <h2>🛒 Mama Belanja Yuk!</h2>
+            <p>Tangkap bahan masakan! Hindari yang sudah busuk 🤢</p>
+          </div>
+          <div class="gstats">
+            <div class="gs"><span>Skor</span><strong id="sc">0</strong></div>
+            <div class="gs"><span>Level</span><strong id="lv">1</strong></div>
+            <div class="gs"><span>Waktu</span><strong id="ti">30</strong></div>
+            <div class="gs">
+              <span>Miss</span
+              ><strong id="ms" style="color: var(--merah)">0</strong>
+            </div>
+          </div>
+          <div class="ttrack"><div id="tbar" style="width: 100%"></div></div>
+          <div id="arena">
+            <div id="aov">
+              <span style="font-size: 2.5rem">🛒</span>
+              <h3>Siap Belanja, Ma?</h3>
+              <p>
+                Tangkap bahan masakan segar yang jatuh!<br />
+                🌟 = 5 poin &nbsp;|&nbsp; 🛒 = 3 poin<br />
+                ❌ Jangan tangkap yang busuk!
+              </p>
+              <button class="btn-g" id="sbtn">Mulai Belanja!</button>
+            </div>
+          </div>
+          <div id="linfo">Tekan mulai untuk bermain</div>
+        </div>
+
+        <div style="text-align: center" class="cr d2">
+          <button class="btn" onclick="completeStep(2)">
+            Lanjut ke Hadiah Terakhir 🎁 <span class="arr">→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+     VOUCHER INDOMARET
+══════════════════════════════ -->
+    <div class="screen hidden" id="s-voucher">
+      <div class="sw">
+        <button class="back-inner" onclick="goTo('hall')">← Kembali</button>
+
+        <div
+          class="content-card cr d1"
+          style="
+            background: linear-gradient(135deg, #fff8f0, #fff5f0);
+            border-color: #f0c0a0;
+          "
+        >
+          <span class="c-icon">🎉</span>
+          <div class="c-tag" style="background: var(--kuning)">
+            🎁 Kado Ketiga — Spesial!
+          </div>
+          <h2 class="c-title" style="font-size: 1.6rem">
+            Yeay! Mama dapat<br />hadiah kejutan! 🎊
+          </h2>
+          <div class="c-divider"><span>🛍️</span></div>
+          <p class="c-body" style="text-align: center; font-size: 0.95rem">
+            Ini hadiah dari kami buat Mama. Boleh dipakai belanja apa aja ya,
+            Ma!
+            <span class="lucu"
+              >Asal jangan lupa beliin kita cemilan juga 😆</span
+            >
+          </p>
+        </div>
+
+        <p class="v-lbl cr d2">Voucher Digital · Indomaret</p>
+
+        <div class="v-outer cr d3">
+          <div>
+            <div class="vh-indomaret">
+              <div class="vlogo-indo">Indomaret</div>
+              <div class="vht-indo">
+                <h3>Voucher Digital</h3>
+                <p>Hadiah Ulang Tahun ke-52 🎂</p>
+              </div>
+            </div>
+            <div class="vbody">
+              <div class="vtag-indo">🎁 Khusus untuk Mama Ririk</div>
+              <div class="vamt">
+                <div class="vl">Nilai Voucher</div>
+                <div class="vv">Rp 100.000</div>
+                <div class="vs">Berlaku di seluruh gerai Indomaret</div>
+              </div>
+              <hr class="vdash" />
+              <div class="bczone">
+                <img
+                  src="img/voucher.png"
+                  alt="Barcode Voucher Indomaret"
+                  onclick="openLb()"
+                  title="Ketuk untuk perbesar"
+                />
+                <div class="zoom-hint">🔍 Ketuk gambar untuk perbesar</div>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 0.5rem;
+                  margin-top: 0.9rem;
+                  font-size: 0.8rem;
+                  color: #666;
+                "
+              >
+                <span>📅</span>
+                <span
+                  >Berlaku s/d:
+                  <strong style="color: #333">Besok Sore</strong></span
+                >
+              </div>
+            </div>
+            <div class="vfoot">
+              <p>
+                <strong>Syarat &amp; Ketentuan:</strong><br />
+                • Voucher hanya dapat digunakan 1 kali<br />
+                • Tidak dapat digabung dengan promo lain<br />
+                • Tidak dapat dicairkan dalam bentuk uang tunai<br />
+                • Tunjukkan barcode kepada kasir saat pembayaran
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center" class="cr d4">
+          <button class="btn" onclick="goTo('end')">Selesai 🎊</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+     END
+══════════════════════════════ -->
+    <div class="screen hidden" id="s-end">
+      <div class="sq" style="text-align: center">
+        <span style="font-size: 3.5rem; display: block; margin-bottom: 0.8rem"
+          >🎂🌸🍲</span
+        >
+        <div class="i-flag">Semua Kado Sudah Dibuka!</div>
+        <h2 class="i-name" style="font-size: clamp(1.8rem, 5vw, 3rem)">
+          Happy 52nd Birthday,<br /><span>Mama Ririk!</span>
+        </h2>
+        <div
+          style="
+            width: 60px;
+            height: 2px;
+            background: var(--terra);
+            margin: 0.8rem auto 1.2rem;
+            border-radius: 1px;
+          "
+        ></div>
+        <p
+          style="
+            color: var(--txm);
+            max-width: 300px;
+            line-height: 1.8;
+            font-size: 1rem;
+          "
+        >
+          Semoga Mama selalu sehat, bahagia, dan dikelilingi orang-orang yang
+          menyayangi Mama. 🙏💕
+        </p>
+        <div style="font-size: 2rem; margin: 1rem 0">💕 🌺 💕</div>
+        <button
+          class="btn-outline"
+          onclick="goTo('hall')"
+          style="margin-top: 0.5rem"
+        >
+          ← Lihat Kado Lagi
+        </button>
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lb" onclick="closeLb()">
+      <button id="lb-x" onclick="closeLb()">✕</button>
+      <img src="img/voucher.png" alt="Voucher Indomaret" />
+    </div>
+
+    <script>
+      /* ── PARTICLES (emak-emak items floating) ── */
+      (function () {
+        const items = ["🌸", "✨", "🌺", "⭐", "💕", "🌿", "🍀", "💐", "🌼"];
+        const c = document.getElementById("pts");
+        for (let i = 0; i < 20; i++) {
+          const d = document.createElement("div");
+          d.className = "pt";
+          d.style.cssText = `left:${Math.random() * 100}%;bottom:-60px;--d:${6 + Math.random() * 8}s;--dl:${Math.random() * 6}s;--x:${(Math.random() - 0.5) * 80}px;--fs:${1 + Math.random() * 1.2}rem`;
+          d.textContent = items[i % items.length];
+          c.appendChild(d);
+        }
+      })();
+
+      /* ── SCREEN SYSTEM ── */
+      const MAP = {
+        intro: "s-intro",
+        hall: "s-hall",
+        msg1: "s-msg1",
+        game: "s-game",
+        voucher: "s-voucher",
+        end: "s-end",
+      };
+      let cur = "intro";
+
+      // Step completion state
+      const done = { 1: false, 2: false, 3: false };
+      const stepScreens = { 1: "msg1", 2: "game", 3: "voucher" };
+
+      function goTo(name) {
+        const from = document.getElementById(MAP[cur]);
+        from.classList.add("exit");
+        setTimeout(() => {
+          from.classList.remove("exit");
+          from.classList.add("hidden");
+          const to = document.getElementById(MAP[name]);
+          to.classList.remove("hidden");
+          if (to.scrollTop !== undefined) to.scrollTop = 0;
+          cur = name;
+          to.querySelectorAll(".cr").forEach((el) => {
+            el.style.animation = "none";
+            el.offsetHeight;
+            el.style.animation = "";
+          });
+        }, 360);
+      }
+
+      function goStep(n) {
+        // Check lock
+        if (n === 2 && !done[1]) {
+          shakeStep(1);
+          showToast("Buka Kado 1 dulu ya, Ma! 😊");
+          return;
+        }
+        if (n === 3 && (!done[1] || !done[2])) {
+          if (!done[1]) shakeStep(1);
+          else shakeStep(2);
+          showToast("Selesaikan kado sebelumnya dulu ya! 🔒");
+          return;
+        }
+        goTo(stepScreens[n]);
+      }
+
+      function completeStep(n) {
+        done[n] = true;
+        updateHall();
+        goTo("hall");
+        // Unlock next
+        if (n < 3) {
+          setTimeout(() => {
+            const next = document.getElementById("step" + (n + 1));
+            next.classList.remove("locked");
+            const lock = document.getElementById("lock" + (n + 1));
+            if (lock) lock.textContent = "";
+            document.getElementById("num" + (n + 1)).style.background = [
+              "",
+              "#C4622A",
+              "#4A8A3A",
+              "#E31837",
+            ][n + 1];
+            showToast(`Kado ${n + 1} sudah terbuka! 🎉`);
+            burstConfetti();
+          }, 400);
+        }
+      }
+
+      function updateHall() {
+        let cnt = 0;
+        [1, 2, 3].forEach((n) => {
+          if (done[n]) {
+            cnt++;
+            document.getElementById("step" + n).classList.add("done");
+          }
+        });
+        const pct = Math.round((cnt / 3) * 100);
+        document.getElementById("prog-bar").style.width = pct + "%";
+        document.getElementById("prog-label").textContent =
+          `${cnt} dari 3 kado dibuka`;
+        if (cnt === 3) setTimeout(() => goTo("end"), 800);
+      }
+
+      function shakeStep(n) {
+        const el = document.getElementById("step" + n);
+        el.style.animation = "shake-step .5s ease";
+        setTimeout(() => (el.style.animation = ""), 600);
+      }
+
+      /* ── TOAST ── */
+      function showToast(msg) {
+        const t = document.createElement("div");
+        t.style.cssText =
+          "position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--terra);color:#fff;padding:.7rem 1.6rem;border-radius:50px;font-family:Nunito,sans-serif;font-size:.88rem;font-weight:700;z-index:9998;box-shadow:0 4px 20px rgba(0,0,0,.2);animation:toast-up .4s ease";
+        t.textContent = msg;
+        document.body.appendChild(t);
+        setTimeout(() => {
+          t.style.opacity = "0";
+          t.style.transition = "opacity .4s";
+          setTimeout(() => t.remove(), 400);
+        }, 2200);
+      }
+
+      /* ── CONFETTI BURST ── */
+      function burstConfetti() {
+        const colors = [
+          "#C4622A",
+          "#E8A820",
+          "#4A8A3A",
+          "#E31837",
+          "#fff",
+          "#F5C840",
+        ];
+        for (let i = 0; i < 30; i++) {
+          const c = document.createElement("div");
+          c.className = "confetti-piece";
+          c.style.cssText = `left:${20 + Math.random() * 60}%;top:-10px;background:${colors[i % colors.length]};--cd:${2 + Math.random() * 2}s;--cdl:${Math.random() * 0.8}s;transform:rotate(${Math.random() * 360}deg);width:${6 + Math.random() * 8}px;height:${6 + Math.random() * 8}px;border-radius:${Math.random() > 0.5 ? "50%" : "2px"}`;
+          document.body.appendChild(c);
+          setTimeout(() => c.remove(), 4000);
+        }
+      }
+
+      /* ── LIGHTBOX ── */
+      function openLb() {
+        document.getElementById("lb").classList.add("on");
+        document.body.style.overflow = "hidden";
+      }
+      function closeLb() {
+        document.getElementById("lb").classList.remove("on");
+        document.body.style.overflow = "";
+      }
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeLb();
+      });
+
+      /* ── GAME ── */
+      let run = false,
+        score = 0,
+        tLeft = 30,
+        misses = 0,
+        level = 1;
+      let spTO, tkTO;
+
+      // [emoji, points, isEvil]
+      const FRESH = [
+        "🥕",
+        "🍅",
+        "🥦",
+        "🧅",
+        "🧄",
+        "🌽",
+        "🍆",
+        "🥬",
+        "🫑",
+        "🥒",
+      ];
+      const STAR_ITEM = "⭐"; // 5pts
+      const CART = "🛒"; // 3pts
+      const EVIL = ["🤢", "🗑️", "🪲", "🐀"]; // avoid
+
+      function startGame() {
+        score = 0;
+        tLeft = 30;
+        misses = 0;
+        level = 1;
+        run = true;
+        document
+          .querySelectorAll("#arena .item-fall")
+          .forEach((e) => e.remove());
+        const ov = document.getElementById("aov");
+        ov.style.opacity = "0";
+        ov.style.pointerEvents = "none";
+        document.getElementById("linfo").textContent =
+          "Tangkap bahan segar, Ma! Hindari yang busuk!";
+        upUI();
+        sched();
+        tick();
+      }
+
+      function tick() {
+        if (!run) return;
+        tLeft--;
+        document.getElementById("ti").textContent = tLeft;
+        document.getElementById("tbar").style.width = (tLeft / 30) * 100 + "%";
+        chkLv();
+        if (tLeft <= 0) {
+          endGame();
+          return;
+        }
+        tkTO = setTimeout(tick, 1000);
+      }
+
+      function chkLv() {
+        const p = level;
+        if (score >= 25 && level < 2) level = 2;
+        if (score >= 60 && level < 3) level = 3;
+        if (score >= 110 && level < 4) level = 4;
+        if (level !== p) {
+          document.getElementById("lv").textContent = level;
+          const msgs = [
+            "",
+            "",
+            "Wah jago nih, Ma! 🔥",
+            "Super cepat! ⚡",
+            "MAMA HEBAT! 👑",
+          ];
+          document.getElementById("linfo").textContent =
+            `Level ${level}! ${msgs[level]}`;
+        }
+      }
+
+      function sched() {
+        if (!run) return;
+        spawnItem();
+        spTO = setTimeout(sched, Math.max(280, 1000 - level * 120));
+      }
+
+      function spawnItem() {
+        if (!run) return;
+        const ar = document.getElementById("arena");
+        const rand = Math.random();
+        const isStar = rand < 0.07,
+          isCart = rand < 0.14 && rand >= 0.07,
+          isEvil_ = rand >= 0.85;
+        const el = document.createElement("div");
+        el.className = "item-fall";
+        const aw = ar.offsetWidth || 560;
+        el.style.left = Math.random() * Math.max(20, aw - 56) + "px";
+        const dur = Math.max(1000, 2800 - level * 320) + "ms";
+        el.style.animationDuration = dur;
+
+        if (isStar) {
+          el.textContent = STAR_ITEM;
+          el.dataset.pts = "5";
+          el.dataset.evil = "0";
+          el.style.filter = "drop-shadow(0 0 8px gold)";
+        } else if (isCart) {
+          el.textContent = CART;
+          el.dataset.pts = "3";
+          el.dataset.evil = "0";
+        } else if (isEvil_) {
+          el.textContent = EVIL[Math.floor(Math.random() * EVIL.length)];
+          el.dataset.pts = "-2";
+          el.dataset.evil = "1";
+        } else {
+          el.textContent = FRESH[Math.floor(Math.random() * FRESH.length)];
+          el.dataset.pts = "1";
+          el.dataset.evil = "0";
+        }
+
+        el.style.fontSize = 1.5 + Math.random() * 0.8 + "rem";
+        el.addEventListener("pointerdown", (e) => {
+          e.stopPropagation();
+          tapItem(el);
+        });
+        el.addEventListener("animationend", () => {
+          if (el.parentNode && !el.classList.contains("caught")) {
+            if (el.dataset.evil === "0") {
+              misses++;
+              document.getElementById("ms").textContent = misses;
+            }
+            el.remove();
+          }
+        });
+        ar.appendChild(el);
+      }
+
+      function tapItem(el) {
+        if (!run || el.classList.contains("caught")) return;
+        el.classList.add("caught");
+        const ar = document.getElementById("arena");
+        const r = el.getBoundingClientRect(),
+          ar2 = ar.getBoundingClientRect();
+        const x = r.left - ar2.left + r.width / 2,
+          y = r.top - ar2.top;
+        const pts = parseInt(el.dataset.pts);
+        const isEvil_ = el.dataset.evil === "1";
+        el.remove();
+
+        const fx = document.createElement("div");
+        fx.className = "catch-fx";
+        fx.style.left = x + "px";
+        fx.style.top = y + "px";
+        fx.textContent = isEvil_ ? "💨" : "✨";
+        ar.appendChild(fx);
+        setTimeout(() => fx.remove(), 500);
+
+        const sfx = document.createElement("div");
+        sfx.className = isEvil_ ? "miss-fx" : "pts-fx";
+        sfx.style.left = x + 8 + "px";
+        sfx.style.top = y - 8 + "px";
+        sfx.textContent = (pts > 0 ? "+" : "") + pts;
+        ar.appendChild(sfx);
+        setTimeout(() => sfx.remove(), 800);
+
+        score = Math.max(0, score + pts);
+        if (isEvil_) {
+          misses++;
+          document.getElementById("ms").textContent = misses;
+        }
+        upUI();
+      }
+
+      function upUI() {
+        document.getElementById("sc").textContent = score;
+        document.getElementById("lv").textContent = level;
+        document.getElementById("ti").textContent = tLeft;
+        document.getElementById("ms").textContent = misses;
+      }
+
+      function endGame() {
+        run = false;
+        clearTimeout(spTO);
+        clearTimeout(tkTO);
+        const rtg =
+          score >= 80
+            ? "MAMA JUARA! 👑 🏆"
+            : score >= 40
+              ? "Jago Banget, Ma! 🛒🌟"
+              : "Lumayan Nih, Ma! 😄 Coba Lagi?";
+        const ov = document.getElementById("aov");
+        ov.innerHTML = `
+    <span style="font-size:2.5rem">🎊</span>
+    <h3>Selesai, Ma!</h3>
+    <div class="score-big">${score}</div>
+    <p style="color:var(--terra);font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">${rtg}</p>
+    <p style="color:var(--txm)">Bahan busuk tertangkap: ${misses}x 😅</p>
+    <button class="btn-g" onclick="startGame()">Main Lagi!</button>
+  `;
+        ov.style.opacity = "1";
+        ov.style.pointerEvents = "all";
+      }
+
+      document.getElementById("sbtn").addEventListener("click", startGame);
+
+      /* ── EXTRA CSS for toast & shake ── */
+      const style = document.createElement("style");
+      style.textContent = `
+@keyframes toast-up{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes shake-step{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+`;
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>
